@@ -1,0 +1,19 @@
+.PVT h2{
+    color: yellow;
+    }
+
+    .PVT{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .contact-form{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        height: 50%;
+        width: 50%;
+    }
