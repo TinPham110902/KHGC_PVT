@@ -33,8 +33,11 @@
   </button>
   </form>
 
-  
 </div>
+@foreach ($Users as $user)
+  <h2> {{ $user->Name}}</h2>
+@endforeach
+
 @endsection
 @push('PVT')
 <link rel="stylesheet" href="{{asset('Css/Style.css')}}">

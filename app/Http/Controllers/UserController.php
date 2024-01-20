@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MyEmail;
+use App\Models\Users;
 class UserController extends Controller
 {
     public function home(){
@@ -13,7 +14,10 @@ class UserController extends Controller
     }
 
     public function contact(){
-        return view('User.contact');
+        $Users= Users::all();
+        return view('User.contact',compact('Users'));
+
+        
     }
 
     public function sendMail(Request $request){
