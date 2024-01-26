@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Mail\MyEmail;
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +26,10 @@ Route::get('/contact',[UserController::class,'contact']);
 
 Route::post('/sendMail',[UserController::class,'sendMail'])->name('sendMail');
 
-// Route::get('/testroute',function(){
-//     $name="Funny Coder";
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//     Mail::to('utru321@gmail.com')->send(new MyEmail($name));
-// });
-// Route::get('/contact', function () {
-//     return view('User.contact');
-// })->name('contact');
+Route::get('/login',[LoginController::class,'login'])->name('login');
 
+Route::get('/register',[RegisterController::class,'register'])->name('register');
+
+Route::post('/register',[RegisterController::class,'create']);
