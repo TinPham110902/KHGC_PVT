@@ -32,6 +32,7 @@
                                 @enderror
                             </div>
                         </div>
+                    
 
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
@@ -71,9 +72,15 @@
                             </div>
                         </div>
                     </form>
+                    @if(session('err'))
+                    <div class="alert alert-danger">
+                        {{ session('err') }}
+                                </div>
+                 @endif
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection

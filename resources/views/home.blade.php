@@ -1,7 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+
+
 <div class="container">
+    @if(Session::has('login'))
+    <div id="alert" class="alert alert-success">
+        {{ Session::get('login') }}
+    </div>
+
+    <script>
+
+        setTimeout(function() {
+            document.getElementById('alert').style.display = 'none';
+        }, 2000); // 5 giây
+    </script>
+
+@endif
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

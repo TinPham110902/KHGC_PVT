@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Mail\MyEmail;
 /*
@@ -20,7 +21,7 @@ Route::get('/', function () {
     return view('Admin.index');
 });
 
-Route::get('/home',[UserController::class,'home']);
+Route::get('/home',[UserController::class,'home'])->name('home');
 
 Route::get('/contact',[UserController::class,'contact']);
 
@@ -30,6 +31,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/login',[LoginController::class,'login'])->name('login');
 
+Route::post('/login',[LoginController::class,'checklogin']);
+
 Route::get('/register',[RegisterController::class,'register'])->name('register');
 
 Route::post('/register',[RegisterController::class,'create']);
+
+Route::resource('post', PostController::class);
