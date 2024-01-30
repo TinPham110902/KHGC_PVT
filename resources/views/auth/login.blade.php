@@ -6,6 +6,13 @@
     <div class="alert alert-success">
         {{ Session::get('alert') }}
     </div>
+
+    <script>
+
+        setTimeout(function() {
+            document.getElementById('alert').style.display = 'none';
+        }, 1000); 
+    </script>
 @endif
 <div class="container">
     <div class="row justify-content-center">
@@ -32,6 +39,7 @@
                                 @enderror
                             </div>
                         </div>
+                    
 
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
@@ -56,7 +64,7 @@
                                         {{ __('Remember Me') }}
                                     </label>
                                 </div>
-                                <a href="">Forgot Password ?</a> | 
+                                <a href="{{ route('mailreset') }}">Forgot Password ?</a> | 
                                 <a href="/register">Register</a>
                             </div>
                         </div>
@@ -71,9 +79,15 @@
                             </div>
                         </div>
                     </form>
+                    @if(session('err'))
+                    <div class="alert alert-danger">
+                        {{ session('err') }}
+                                </div>
+                 @endif
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection

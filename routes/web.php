@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Mail\MyEmail;
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +23,7 @@ Route::get('/', function () {
     return view('Admin.index');
 });
 
-Route::get('/home',[UserController::class,'home']);
+Route::get('/home',[UserController::class,'home'])->name('home');
 
 Route::get('/contact',[UserController::class,'contact']);
 
@@ -30,6 +33,19 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/login',[LoginController::class,'login'])->name('login');
 
+Route::post('/login',[LoginController::class,'authenticated']);
+
+Route::post('/logout',[LoginController::class,'logout'])->name('logout');
+
 Route::get('/register',[RegisterController::class,'register'])->name('register');
 
 Route::post('/register',[RegisterController::class,'create']);
+
+
+Route::get('/mailreset',[ResetPasswordController::class,'mailreset'])->name('mailreset');
+Route::post('/mailreset',[ResetPasswordController::class,'postreset']);
+
+Route::get('/reset',[ForgotPasswordController::class,'reset'])->name('reset');
+Route::post('/reset',[ForgotPasswordController::class,'postreset']);
+
+Route::resource('post', PostController::class);
