@@ -27,7 +27,7 @@ class MyEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'My Email',
+            subject: 'Chào bạn!',
         );
     }
 
@@ -37,8 +37,8 @@ class MyEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.test-email',
-            with: ['data'=>$this->data]
+            view: 'mail.test-email'
+          
         );
     }
 
