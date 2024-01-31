@@ -3,15 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Models\Post;
+use App\Models\User;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PostController extends Controller
 {
+    use SoftDeletes;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('post.index');
+
+         // Lấy người dùng đã đăng nhập
+    $user = Auth::user();
+
+    // Lấy danh sách các bài viết của người dùng đã đăng nhập cùng với thông tin về người dùng
+    $posts = Post::with('user')->where('user_id', $user->id)->get();
+
+    return view('post.index', compact('posts'));
     }
 
     /**
@@ -19,7 +32,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
@@ -35,7 +48,7 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('post.show');
     }
 
     /**
@@ -43,7 +56,7 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('post.edit');
     }
 
     /**
@@ -59,6 +72,21 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->delete();
+       
+
+        return redirect()->back()->with('success', 'Bài viết đã được xoá thành công.');
     }
+
+    public function destroyAll($id)
+    {
+        //$id=UserId
+        $user = Auth::User()->findOrFail($id);
+        $user->posts()->delete();
+       
+
+        return redirect()->back()->with('success', 'Bài viết đã được xoá thành công.');
+    }
+   
 }

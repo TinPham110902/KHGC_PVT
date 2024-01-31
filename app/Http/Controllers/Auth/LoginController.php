@@ -29,12 +29,18 @@ class LoginController extends Controller
    Session::flash('login', 'Đăng nhập thành công');
 
    $user = User::where('email',$request-> email)->first();
-   Auth::login($user);
+   
+   if($user){
+    Auth::login($user);
+   }
+ 
+
     return redirect()->route('post.index');
   }
 
   public function logout()
 {
+  
     Auth::logout();
     
     return redirect('/login');

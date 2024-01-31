@@ -1,8 +1,7 @@
 <nav class="main-header navbar navbar-expand navbar-light navbar-white" >
     <div class="container">
-      <a href="index3.html" class="navbar-brand">
-        <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-             style="opacity: .8">
+      <a href="/" class="navbar-brand">
+     
         <span class="brand-text font-weight-light">AdminLTE 3</span>
       </a>
       <!-- Left navbar links -->
@@ -10,22 +9,10 @@
         <li class="nav-item">
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="/home" class="nav-link">Home</a>
+          <a href="{{ route('post.index') }}" class="nav-link">Danh sách bài viết</a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="/contact" class="nav-link">Contact</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Help
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
-            <a class="dropdown-item" href="#">FAQ</a>
-            <a class="dropdown-item" href="#">Support</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Contact</a>
-          </div>
-        </li>
+      
+      
       </ul>
       <!-- SEARCH FORM -->
       <form class="form-inline ml-3">

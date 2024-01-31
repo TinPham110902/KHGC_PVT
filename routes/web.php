@@ -19,20 +19,35 @@ use App\Mail\MyEmail;
 |
 */
 
-Route::get('/', function () {
-    return view('Admin.index');
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/', function () {
+        return view('home');
+    });
+    
+    
+    Route::get('/home',[UserController::class,'home'])->name('home');
+    
+    Route::get('/contact',[UserController::class,'contact']);
+    
+    Route::post('/sendMail',[UserController::class,'sendMail'])->name('sendMail');
+    
+    Route::get('/profile',[UserController::class,'profile'])->name('profile');
+    
+    Route::get('/profile/edit',[UserController::class,'profile_edit'])->name('profile_edit');
+    Route::post('/profile/edit',[UserController::class,'profile_edit_post']);
+    
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    
+    
+    Route::resource('post', PostController::class);
+
+    Route::delete('post/post/{id}', [PostController::class,'destroyAll'])->name('post.destroyAll');
+
 });
 
-Route::get('/home',[UserController::class,'home'])->name('home');
-
-Route::get('/contact',[UserController::class,'contact']);
-
-Route::post('/sendMail',[UserController::class,'sendMail'])->name('sendMail');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::get('/login',[LoginController::class,'login'])->name('login');
-
+    
 Route::post('/login',[LoginController::class,'authenticated']);
 
 Route::post('/logout',[LoginController::class,'logout'])->name('logout');
@@ -47,5 +62,3 @@ Route::post('/mailreset',[ResetPasswordController::class,'postreset']);
 
 Route::get('/reset',[ForgotPasswordController::class,'reset'])->name('reset');
 Route::post('/reset',[ForgotPasswordController::class,'postreset']);
-
-Route::resource('post', PostController::class);
