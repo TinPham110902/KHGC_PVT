@@ -44,11 +44,13 @@
           <div class="d-flex">
             <a href="{{ route('post.create') }}" class="btn btn-primary  me-2">Thêm mới</a>
 
-            <form action="{{ route('post.destroyAll', ['id' => Auth::id()]) }}" method="POST">
+            {{-- <form action="{{ route('post.destroyAll', ['id' => Auth::id()]) }}" method="POST">
               @csrf
               @method('DELETE')
-              <button type="submit" class="btn btn-danger me-2">Xóa tất cả</button>
-          </form>
+              <button type="submit" class="btn btn-danger me-2" data-bs-target="#confirmDeleteAllModalLabel">Xóa tất cả</button>
+          </form> --}}
+
+          <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#confirmDeleteAllModal">Xóa tất cả</button>
            
         </div>
           <table id="example2" class="table table-bordered table-hover">
@@ -72,14 +74,12 @@
               <td>{{ $post -> status }}</td>
               <td>
                 <div class="d-flex">
-                    <form action="{{ route('post.destroy', ['post' => $post->id]) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger me-2"><i class="fa-solid fa-trash"></i></button>
-                    </form>
+                  <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+                
 
-                  
-
+                @include('post.popup')
                     <a href="{{ route('post.edit', ['post' => $post->id]) }}" class="btn btn-warning  me-2"><i class="fa-solid fa-pen"></i></a>
                     <a href="{{ route('post.show', ['post' => $post->id]) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
                 </div>
@@ -90,6 +90,8 @@
            
             </tbody>
           </table>
+
+        
         </div>
         <!-- /.card-body -->
       </div>
