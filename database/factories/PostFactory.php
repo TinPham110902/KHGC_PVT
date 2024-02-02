@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Post;
+use App\Models\User;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
  */
@@ -18,12 +19,12 @@ class PostFactory extends Factory
 
     public function definition(): array
     {
-        $userId = Auth::user()->id;
+       
         return [
-            'thumbnail' => $this->faker->imageUrl(),
+            'user_id' => User::inRandomOrder()->first()->id,
             'description'=>$this->faker->paragraph,
             'title' => $this->faker->sentence,
-            'status' => $this->faker->randomElement([0, 1]),
+            'content'=>$this->faker->text
         ];
     }
 }

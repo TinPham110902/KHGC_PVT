@@ -12,21 +12,24 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-  // Post::factory(10)->create();
+      
+  Post::factory(5)->create();
 
-   Post::create([
-    'thumbnail' => 'abc',
-    'description'=>'fake',
-    'title' => 'fgewwef',
-    'status' => '0',
-]);
+//    Post::create([
+    
+//     'description'=>'fake',
+//     'title' => 'Chào các bạn',
+//     'content' => 'sfjsfijsdfpojs',
+//     'status' => '0',
+// ]);
 
-Post::create([
-    'thumbnail' => 'abc2',
-    'description'=>'fake2',
-    'title' => 'fgewwef2',
-    'status' => '1',
-]);
+// Post::create([
+    
+//     'description'=>'fake2',
+//     'title' => 'xin chào các bạn',
+//     'content' => 'sfjsfijsdfpojs',
+//     'status' => '1',
+// ]);
 
     }
 }

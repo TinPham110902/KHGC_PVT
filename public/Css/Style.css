@@ -18,5 +18,19 @@
         width: 50%;
     }
 
+    .post_create{
+        width: 70%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .show-post{
+        width: 70%;
+       
+       
+       
+    }
+
 
     

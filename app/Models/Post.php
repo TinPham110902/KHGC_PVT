@@ -5,21 +5,63 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
+use App\Enums\EnumStatus;
+
 class Post extends Model
 {
   use SoftDeletes;
-
+  use HasFactory;
     protected $table = 'posts';
 
     protected $fillable = [
-      'thumbnail',
+    'user_id',
       'title',
+      'slug',
+      'content',
+      'description',
       'status',
-      'description'
     ];
+
+    protected $casts = [
+        'status' => EnumStatus::class
+    ];
+
 
     public function user()
 {
     return $this->belongsTo(User::class);
 }
+
+protected static function boot()
+{
+    parent::boot();
+
+    static::saving(function ($model) {
+        $model->slug = Str::slug($model->title);
+        $model->slug = static::makeUniqueSlug($model->slug, $model->id);
+    });
+}
+
+public static function makeUniqueSlug($slug, $id = null)
+{
+    $originalSlug = $slug;
+    $counter = 2;
+
+    while (static::where('slug', $slug)->where('id', '!=', $id)->exists()) {
+        $slug = $originalSlug . '-' . $counter;
+        $counter++;
+    }
+
+    return $slug;
+}
+
+
+// public function getThumbnailAttribute()
+// {
+//     $imagePath = $this->attributes['image'];
+//     $thumbnailPath = '';
+
+//     return $thumbnailPath;
+// }
 }

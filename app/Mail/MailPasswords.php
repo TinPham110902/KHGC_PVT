@@ -16,7 +16,7 @@ class MailPasswords extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(private $resetLink)
+    public function __construct(private $user)
     {
         //
     }
@@ -37,7 +37,7 @@ class MailPasswords extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.resetmail',  with: ['resetLink' => $this->resetLink]
+            view: 'mail.resetmail',  with: ['user' => $this->user]
         );
     }
 

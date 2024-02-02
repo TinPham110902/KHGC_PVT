@@ -22,12 +22,16 @@
     <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-    <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
+    {{-- <link rel="stylesheet" href="{{ asset }}public/Css/Style.css"> --}}
 
-    <script src="https://kit.fontawesome.com/492cb427cb.js" crossorigin="anonymous"></script>
+    <!-- Theme style -->
+    <script src="https://kit.fontawesome.com/492cb427cb.js" crossorigin="anonymous"></script> 
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    
 </head>
 <body>
     <div id="app">
@@ -89,12 +93,14 @@
         </nav>
         <main class="py-4">
             @yield('content')
+            @stack('PVT')
         </main>
     </div>
 
 
 
-    
+
+
 
     <script src="../../plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -112,10 +118,11 @@
     <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="../../plugins/toastr/toastr.min.js"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
+ 
     <!-- Page specific script -->
     <script>
       $(function () {
@@ -132,8 +139,10 @@
           "autoWidth": false,
           "responsive": true,
         });
+        
       });
     </script>
 
+<x-alert> </x-alert>
 </body>
 </html>

@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Models\User;
 use Auth;
 use App\Providers\RouteServiceProvider;
+use App\Helper\FlashHelper;
 class CheckLogin
 {
     /**
@@ -20,19 +21,26 @@ class CheckLogin
 
    
             $email = $request->input('email');
+            
         $user = User::where('email', $email)->first();
 
  
         if ($user) {
-            switch ($user->status) {
-                case 0:
-                    return redirect()->back()->with('err', 'Tài khoản đang chờ phê duyệt');
-                case 2:
-                    return redirect()->back()->with('err', 'Tài khoản bị từ chối');
-                case 3:
-                    return redirect()->back()->with('err', 'Tài khoản bị khóa');
+            $statusMessages = [
+                0 => 'Tài khoản đang chờ phê duyệt',
+                2 => 'Tài khoản bị từ chối',
+                3 => 'Tài khoản bị khóa'
+            ];
+        
+            if (array_key_exists($user->status, $statusMessages)) {
+                $errorMessage = $statusMessages[$user->status];
+
+                FlashHelper::flashMessage('warning', $errorMessage);
+                return redirect()->back();
             }
-        }    
+        }
+
+     
     
         return $next($request);
     }

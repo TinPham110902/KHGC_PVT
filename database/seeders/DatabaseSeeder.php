@@ -16,22 +16,9 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
       
-        User::create([
-            'first_name' => 'Admin',
-            'last_name' => 'Super',
-            'email'=>'superadmin@khgc.com',
-            'password'=>'Abcd@1234',
-            'role'=>'admin'
-        ]);
-
-        User::create([
-            'first_name' => 'Tin',
-            'last_name' => 'Pham',
-            'email'=>'tindien123@icloud.com',
-            'password'=>'Tinchuaneem123@',
-            'role'=>'user'
-        ]);
-        
+  
+       $this->call(UserSeeder::class);
+       
         $this->call(PostSeeder::class);
 
    

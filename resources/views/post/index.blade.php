@@ -2,17 +2,11 @@
 
 @section('content')
 
-    @if(Session::has('login'))
+    {{-- @if(Session::has('login'))
     <div id="alert" class="alert alert-success">
         {{ Session::get('login') }}
     </div>
 
-    <script>
-
-        setTimeout(function() {
-            document.getElementById('alert').style.display = 'none';
-        }, 2000); // 5 giây
-    </script>
 
 @endif
 
@@ -21,14 +15,11 @@
     {{ Session::get('success') }}
 </div>
 
-<script>
 
-    setTimeout(function() {
-        document.getElementById('alert').style.display = 'none';
-    }, 2000); // 5 giây
-</script>
+@endif --}}
 
-@endif
+
+
 
 <div class="row">
     <div class="col-12">
@@ -56,7 +47,7 @@
           <table id="example2" class="table table-bordered table-hover">
             <thead>
             <tr>
-              <th>Thumbnail</th>
+             
               <th>Title</th>
               <th>Description</th>
               <th>Pushlish_date</th>
@@ -67,11 +58,11 @@
             <tbody>
                 @foreach ($posts as $post)
             <tr>
-              <td>{{ $post -> thumbnail }}</td>
+           
               <td>{{ $post -> title }}</td>
               <td>{{ $post -> description }}</td>
               <td>{{ $post -> created_at }}</td>
-              <td>{{ $post -> status }}</td>
+              <td>{{ $post -> status->name }}</td>
               <td>
                 <div class="d-flex">
                   <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
@@ -102,6 +93,5 @@
   </div>
   <!-- /.row -->
 </div>
-
 
     @endsection

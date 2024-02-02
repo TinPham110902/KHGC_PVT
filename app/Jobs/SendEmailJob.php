@@ -18,7 +18,7 @@ class SendEmailJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(User $user)
+    public function __construct($user)
     {
         $this->user = $user;
     }
@@ -28,8 +28,6 @@ class SendEmailJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $resetLink = route('reset');
-      
-        Mail::to($this->user->email)->send(new MailPasswords($resetLink));
+        Mail::to($this->user->email)->send(new MailPasswords($this->user));
     }
 }

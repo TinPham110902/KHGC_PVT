@@ -60,5 +60,8 @@ Route::post('/register',[RegisterController::class,'create']);
 Route::get('/mailreset',[ResetPasswordController::class,'mailreset'])->name('mailreset');
 Route::post('/mailreset',[ResetPasswordController::class,'postreset']);
 
-Route::get('/reset',[ForgotPasswordController::class,'reset'])->name('reset');
-Route::post('/reset',[ForgotPasswordController::class,'postreset']);
+Route::get('/get-password/{users}/{token}',[ResetPasswordController::class,'getPass'])->name('customer.getPass');
+Route::post('/get-password/{users}/{token}',[ResetPasswordController::class,'postGetpass']);
+
+// Route::get('/reset',[ResetPasswordController::class,'reset'])->name('reset');
+// Route::post('/reset',[ResetPasswordController::class,'postreset']);
