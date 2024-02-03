@@ -51,13 +51,17 @@ class PostController extends Controller
     public function store(postRequest $request)
     {
 
-    Post::create([
-
+$post =  Post::create([
     'user_id'=>Auth::id(),
     'description'=>$request['description'],
     'title' => $request['title'],
     'content' => $request['content'],
-        ]);
+]);
+
+$post->addMediaFromRequest('thumbnail')
+->usingName($post->id)
+->toMediaCollection();
+       
 
         FlashHelper::flashMessage('success', 'Tạo bài viết thành công');
 return redirect()->route('post.index');
@@ -66,35 +70,39 @@ return redirect()->route('post.index');
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Post $post)
     {
-        $post=Post::find($id);
+      
         return view('post.show',compact('post'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    { 
-        $post=Post::find($id);
-        return view('post.edit',compact('post'));
+    public function edit(Post $post)
+    {
+        if(Auth::id() ===$post->user_id)
+        { 
+            return view('post.edit',compact('post'));
   
+        }
+       return abort('404');
+      
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(postRequest $request, string $id)
+    public function update(postRequest $request, Post $post)
     {
         
-        $data = [
-        'description' => $request->input('description'),
-        'title' => $request->input('title'),
-        'content' => $request->input('content'),
-    ];
+    //     $data = [
+    //     'description' => $request->input('description'),
+    //     'title' => $request->input('title'),
+    //     'content' => $request->input('content'),
+    // ];
 
-    $this->postService->update($data, $id);
+    $this->postService->update($request, $post);
        
 
         return redirect()->route('post.index');
@@ -103,9 +111,10 @@ return redirect()->route('post.index');
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        $post = Post::findOrFail($id);
+        
+      
         $post->delete();
 
         FlashHelper::flashMessage('success', 'Bài viết đã được xoá thành công.');

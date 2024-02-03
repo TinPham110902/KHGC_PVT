@@ -56,6 +56,7 @@
             </tr>
             </thead>
             <tbody>
+              
                 @foreach ($posts as $post)
             <tr>
            
@@ -65,12 +66,13 @@
               <td>{{ $post -> status->name }}</td>
               <td>
                 <div class="d-flex">
+                  
+                
                   <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
                     <i class="fa-solid fa-trash"></i>
                 </button>
                 
 
-                @include('post.popup')
                     <a href="{{ route('post.edit', ['post' => $post->id]) }}" class="btn btn-warning  me-2"><i class="fa-solid fa-pen"></i></a>
                     <a href="{{ route('post.show', ['post' => $post->id]) }}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
                 </div>
@@ -81,7 +83,7 @@
            
             </tbody>
           </table>
-
+          @include('post.popup')
         
         </div>
         <!-- /.card-body -->

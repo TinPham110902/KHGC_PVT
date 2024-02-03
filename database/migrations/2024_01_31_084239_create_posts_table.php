@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('title');
             $table->text('content');
+            $table->string('thumbnail')->nullable();
             $table->string('slug')->unique();
             $table->timestamp('publish_date')->nullable();
             $table->integer('status')->default(EnumStatus::UPDATED);

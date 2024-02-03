@@ -2,8 +2,11 @@
 
 @section('content')
 
-<h1>trang chỉnh sửa bài viết</h1>
-
+<div class="card">
+<div class="card-header">
+    <h3 class="card-title">Trang chỉnh sửa bài viết</h3>
+  </div>
+  <div class="card-body">
 <div class="container">
     <form action="{{ route('post.update', ['post' => $post->id]) }}" method="POST">
         @csrf
@@ -40,6 +43,8 @@
             </div>
         </div>
     </form>
+</div>
+  </div>
     <script>
         ClassicEditor
             .create( document.querySelector( '#task-textarea' ) )

@@ -7,16 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use App\Enums\EnumStatus;
-
-class Post extends Model
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+class Post extends Model implements HasMedia
 {
   use SoftDeletes;
   use HasFactory;
+  use InteractsWithMedia;
     protected $table = 'posts';
 
     protected $fillable = [
     'user_id',
       'title',
+      'thumbnail',
       'slug',
       'content',
       'description',

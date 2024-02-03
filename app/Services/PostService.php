@@ -3,12 +3,12 @@
 namespace App\Services;
 
 use App\Models\Post;
-
+use App\Http\Requests\postRequest;
 class PostService
 {
-    public function update(array $data, string $id)
+    public function update(postRequest $request, Post $post)
     {
-        Post::where('id', $id)->update([
+        $post->update([
             'description' => $data['description'],
             'title' => $data['title'],
             'content' => $data['content'],
