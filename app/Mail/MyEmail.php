@@ -8,19 +8,23 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Message;
-
+use Illuminate\Support\Facades\Session;
 class MyEmail extends Mailable
 {
     use Queueable, SerializesModels;
-    public string $message;
+
     /**
      * Create a new message instance.
      */
-    public function __construct(string $message)
-    {
-        $this->message = $message;
+    public function __construct(
+
+        protected string $message,
+
+    ) {
+
+        Session::flash('message', $this->message);
     }
+
 
     /**
      * Get the message envelope.
@@ -38,8 +42,10 @@ class MyEmail extends Mailable
     public function content(): Content
     {
         return new Content(
+
             view: 'mail.test-email',
-            with: ['message' => $this->message]
+
+
         );
     }
 

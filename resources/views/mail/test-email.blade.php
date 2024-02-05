@@ -1,5 +1,1 @@
-
-
-<p>{{ $message }}</p>
-
-
+<p>{{ Session::get('message') }}</p>

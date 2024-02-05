@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\EnumStatus;
 use App\Models\Post;
 use App\Models\User;
 use App\Http\Requests\postRequest;
@@ -19,13 +20,18 @@ class PostService
             'title' => $request['title'],
             'content' => $request['content'],
         ]);
+
         if (Auth::User()->role == 'admin') {
             $post->update([
                 'status' => $request['status'],
             ]);
 
-            // $message='Bài viết có Tiêu đề:'.$request['title'].'của bạn đã được phê duyệt / từ chối';
-            // Mail::to( FUser::Find($post->user_id)->email)->send(new MyEmail($message));
+            $allow='được phê duyệt';
+            if($post->status== EnumStatus::DENIED)
+            $allow='bị từ chối';
+            $message='Bài viết có Tiêu đề:'.$request['title'].'của bạn đã '. $allow;
+
+            Mail::to( User::Find($post->user_id)->email)->send(new MyEmail($message));
 
 
         }

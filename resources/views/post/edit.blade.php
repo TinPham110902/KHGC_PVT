@@ -36,9 +36,12 @@
                                 <select class="form-control" name="status" id="exampleFormControlSelect1">
                                     <option {{ $post->status->name == 'WAITING' ? 'selected' : '' }} value="0">WAITING
                                     </option>
-                                    <option {{ $post->status->name == 'UPDATED' ? 'selected' : '' }} value="1">Updated
+
+                                    <option {{ $post->status->name == 'PUSHLISHED' ? 'selected' : '' }} value="1">PUSHLISHED
                                     </option>
 
+                                    <option {{ $post->status->name == 'DENIED' ? 'selected' : '' }} value="2">DENIED
+                                    </option>
                                 </select>
                             </div>
                         </div>

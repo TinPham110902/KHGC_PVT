@@ -35,7 +35,7 @@ class PostController extends Controller
     public function user_index()
     {
        
-        $posts = Post::where('status', EnumStatus::UPDATED)->get();
+        $posts = Post::where('status', EnumStatus::PUSHLISHED)->get();
 
         return view('post.user_index', compact('posts'));
     }
@@ -130,13 +130,6 @@ class PostController extends Controller
      */
     public function update(postRequest $request, Post $post)
     {
-
-        //     $data = [
-        //     'description' => $request->input('description'),
-        //     'title' => $request->input('title'),
-        //     'content' => $request->input('content'),
-        // ];
-
         $this->postService->update($request, $post);
 
         if (Auth::User()->role == 'admin') {
