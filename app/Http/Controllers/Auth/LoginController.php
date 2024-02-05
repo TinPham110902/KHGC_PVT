@@ -23,8 +23,6 @@ class LoginController extends Controller
       if(!Auth::check()){
          $this->middleware('guest')->except('logout');
       }
-     $this->middleware('checkuserstatus');
-   
     }
   public function login(){
 

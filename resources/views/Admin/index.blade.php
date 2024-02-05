@@ -21,7 +21,7 @@
                
             </div>
             <a name="" id="" class="btn btn-primary" href="{{ route('admin.post') }}" role="button">Quản lý bài viết</a>
-            <a name="" id="" class="btn btn-primary" href="{{ route('admin.index') }}" role="button">Quản lý tài khoản</a>
+            <a name="" id="" class="btn btn-primary" href="{{ route('admin.user') }}" role="button">Quản lý tài khoản</a>
         </div>
     </div>
 </div>

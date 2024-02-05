@@ -24,7 +24,8 @@ class profileRequest extends FormRequest
         return [
             'first_name' => ['string', 'max:30'],
             'last_name' => ['string', 'max:20'],
-            'address'=>['max:200']
+            'address'=>['max:200'],
+            'status'
         ];
     }
 }

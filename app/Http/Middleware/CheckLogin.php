@@ -20,23 +20,21 @@ class CheckLogin
     {
 
    
-            $email = $request->input('email');
             
-        $user = User::where('email', $email)->first();
-
- 
-        if ($user) {
+    
+        if (Auth::check() && Auth::user()->role != 'admin') {
             $statusMessages = [
                 0 => 'Tài khoản đang chờ phê duyệt',
                 2 => 'Tài khoản bị từ chối',
                 3 => 'Tài khoản bị khóa'
             ];
         
-            if (array_key_exists($user->status, $statusMessages)) {
-                $errorMessage = $statusMessages[$user->status];
+            if (array_key_exists(Auth::User()->status->value, $statusMessages)) {
+                $errorMessage = $statusMessages[Auth::User()->status->value];
 
                 FlashHelper::flashMessage('warning', $errorMessage);
-                return redirect()->back();
+                Auth::logout();
+                return redirect()->route('login');
             }
         }
 
