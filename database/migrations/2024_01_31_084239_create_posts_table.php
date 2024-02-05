@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('thumbnail')->nullable();
             $table->string('slug')->unique();
             $table->timestamp('publish_date')->nullable();
-            $table->integer('status')->default(EnumStatus::UPDATED);
+            $table->integer('status')->default(EnumStatus::WAITING);
             $table->timestamps();
              $table->foreign('user_id')->references('id')->on('users');
         });

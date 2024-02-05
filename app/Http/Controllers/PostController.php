@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\EnumStatus;
 use Illuminate\Http\Request;
 use App\Http\Requests\postRequest;
 use Auth;
@@ -33,8 +34,8 @@ class PostController extends Controller
 
     public function user_index()
     {
-
-        $posts = Post::all();
+       
+        $posts = Post::where('status', EnumStatus::UPDATED)->get();
 
         return view('post.user_index', compact('posts'));
     }

@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Title</label>
                         <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"
-                            value="{{ $post->title->old('title') }}" id="exampleFormControlInput1" placeholder="Title">
+                            value="{{ $post->title }}" id="exampleFormControlInput1" placeholder="Title">
                         @error('title')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -25,7 +25,7 @@
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Description</label>
                         <input type="text" name="description" class="form-control" id="exampleFormControlInput1"
-                            value="{{ $post->description->old('description') }}" placeholder="Description">
+                            value="{{ $post->description }}" placeholder="Description">
                     </div>
                     @if (Auth::User()->role == 'admin')
                         <div class="form-group">
@@ -34,7 +34,8 @@
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">Status</label>
                                 <select class="form-control" name="status" id="exampleFormControlSelect1">
-                                    <option {{ $post->status->name == 'NEW' ? 'selected' : '' }} value="0">New</option>
+                                    <option {{ $post->status->name == 'WAITING' ? 'selected' : '' }} value="0">WAITING
+                                    </option>
                                     <option {{ $post->status->name == 'UPDATED' ? 'selected' : '' }} value="1">Updated
                                     </option>
 

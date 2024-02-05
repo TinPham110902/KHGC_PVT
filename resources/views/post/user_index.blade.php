@@ -54,7 +54,7 @@
      
       </tbody>
     </table>
-    @include('post.popup')
+   
   
 </div>
 
