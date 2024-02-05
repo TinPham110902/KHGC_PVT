@@ -2,9 +2,10 @@
 
 namespace App\Enums;
 
-enum EnumStatus : string{
+enum EnumStatus: string
+{
     case NEW = '0';
-    case UPDATED =  '1';
-   
+    case UPDATED = '1';
+
 }
 

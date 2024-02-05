@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\MyEmail;
 
 class RegisterController extends Controller
-
 {
     /*
     |--------------------------------------------------------------------------
@@ -28,16 +27,17 @@ class RegisterController extends Controller
     |
     */
 
-    public function register(){
+    public function register()
+    {
 
         return view('auth.register');
 
-      }
+    }
 
-      public function create(registerRequest $request)
+    public function create(registerRequest $request)
     {
 
-       User::create([
+        User::create([
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
             'email' => $request['email'],
@@ -45,10 +45,11 @@ class RegisterController extends Controller
             'address' => $request['address'],
         ]);
 
-        Mail::to($request['email'])->send(new MyEmail($request));
+        $message = 'Cảm ơn bạn đã đăng ký';
+        Mail::to($request['email'])->send(new MyEmail($message));
 
         Session::flash('alert', 'Đăng ký tài khoản thành công');
-        
+
         return redirect()->route('login');
 
     }

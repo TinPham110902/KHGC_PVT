@@ -8,10 +8,11 @@
       <ul class="navbar-nav">
         <li class="nav-item">
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="{{ route('post.index') }}" class="nav-link">Danh sách bài viết</a>
-        </li>
       
+
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="{{ route('post.user_index') }}" class="nav-link">Tin tức</a>
+        </li>
       
       </ul>
       <!-- SEARCH FORM -->

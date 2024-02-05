@@ -2,24 +2,6 @@
 
 @section('content')
 
-    {{-- @if(Session::has('login'))
-    <div id="alert" class="alert alert-success">
-        {{ Session::get('login') }}
-    </div>
-
-
-@endif
-
-@if(Session::has('success'))
-<div id="alert" class="alert alert-success">
-    {{ Session::get('success') }}
-</div>
-
-
-@endif --}}
-
-
-
 
 <div class="row">
     <div class="col-12">
@@ -35,12 +17,6 @@
           <div class="d-flex">
             <a href="{{ route('post.create') }}" class="btn btn-primary  me-2">Thêm mới</a>
 
-            {{-- <form action="{{ route('post.destroyAll', ['id' => Auth::id()]) }}" method="POST">
-              @csrf
-              @method('DELETE')
-              <button type="submit" class="btn btn-danger me-2" data-bs-target="#confirmDeleteAllModalLabel">Xóa tất cả</button>
-          </form> --}}
-
           <button type="button" class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#confirmDeleteAllModal">Xóa tất cả</button>
            
         </div>
@@ -48,10 +24,8 @@
             <thead>
             <tr>
              
-              <th>Title</th>
-              <th>Description</th>
-              <th>Pushlish_date</th>
-              <th>Status</th>
+              
+              <th></th>
               <th>Action</th>
             </tr>
             </thead>
@@ -60,11 +34,28 @@
                 @foreach ($posts as $post)
             <tr>
            
-              <td>{{ $post -> title }}</td>
-              <td>{{ $post -> description }}</td>
-              <td>{{ $post -> created_at }}</td>
-              <td>{{ $post -> status->name }}</td>
+             
+              <td> 
+                    <div class="row">
+                        <div class="col-md-4">
+                            @if ($post->hasMedia())
+                            <img class="img-fluid" src="{{ $post->getFirstMediaUrl() }}" alt="">
+                            @else
+                            <img class="img-fluid" src="/storage/defaut_img/not found.png" alt="">
+                            @endif
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                               <h1 class="card-title"> <strong>{{ $post->title }}</strong></h1>
+                           
+                                <p class="card-text">{{ $post->description }}</p>
+                                <p>  <small>{{ $post->created_at }}</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </td>
               <td>
+
                 <div class="d-flex">
                   
                 
@@ -79,17 +70,16 @@
                
             </td>
             </tr>
+            
             @endforeach
            
             </tbody>
           </table>
           @include('post.popup')
         
-        </div>
+      </div>
         <!-- /.card-body -->
       </div>
-      <!-- /.card -->
-      <!-- /.card -->
     </div>
     <!-- /.col -->
   </div>
